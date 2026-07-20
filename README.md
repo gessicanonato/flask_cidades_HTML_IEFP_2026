@@ -137,3 +137,6 @@ app/
 - As passwords são armazenadas com hash (`generate_password_hash` / `check_password_hash` do Werkzeug); nunca em texto simples.
 - O upload de fotografias grava o ficheiro em `app/static/img/cidades` com um nome único baseado em timestamp, e regista o registo correspondente na tabela `fotos`.
 - A pesquisa de cidades destaca o termo pesquisado a negrito (`<strong>`) na descrição apresentada.
+
+## Licença
+Este projeto foi desenvolvido no âmbito do curso CET em Aplicações de Informática de Gestão do IEFP.
