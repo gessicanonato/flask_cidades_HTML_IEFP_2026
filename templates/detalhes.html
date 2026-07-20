@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}  Camalheia - {{dados.nome_c}}  {% endblock %}
+
+{% block intro %}
+    <p id="p_titulo_01">{{dados.nome_c}}</p>  
+{% endblock %}
+
+{% block content %}
+<br>
+<div>
+    <p>
+        <strong>País:</strong> 
+        {{ dados.0.pais_c }}
+    </p>
+    <p>
+        <strong>Habitantes:</strong> 
+        {{ dados.0.habitantes_c }}
+    </p>
+    <p>
+        <strong>Fundação:</strong> 
+        {{ dados.0.dataf_AC }}
+    </p>
+    <p>
+        {{ dados.0.desc_c }}
+    </p>
+</div>
+<br><br>
+<div class="cxFlex100">
+    {% for foto in dados[1] %}
+        {% set fotografia = foto.img_f %}
+        <div class="moldura">
+            <img src="{{ url_for('static', filename='img/cidades/' ~ fotografia) }}" class="miniatura">
+            {% if user_nivel == 1 %}
+                <a href="el_fotos.php?id_foto={{ foto.id_f }}" class="eliminar-foto">
+                <a href="{{ url_for('cidades.eliminar_foto',id_foto=foto.id_f) }}" class="eliminar-foto">
+                    Eliminar
+                </a>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

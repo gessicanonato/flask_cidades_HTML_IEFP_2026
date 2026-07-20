@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}  Camalheia - Adicionar cidade  {% endblock %}
+
+{% block intro %}
+    <p id="p_titulo_01">Adicionar cidade</p>  
+{% endblock %}
+
+{% block content %}
+    <br>
+    <div>
+        <form method="POST" action=" {{ url_for('cidades.add_cidade') }} ">
+            <input type="text" name="fnome" placeholder="Nome da cidade" class="class-inputs" required> <br><br>
+            <input type="text" name="fpais" placeholder="País" class="class-inputs" required> <br><br>
+            <input type="number" name="fdataf" placeholder="Data de fundação" class="class-inputs" required> <br><br>
+            <input type="number" name="fhabitantes" placeholder="Número de habitantes" class="class-inputs" required> <br><br>
+            <textarea name="fdescricao" placeholder="Texto descritivo" class="class-inputs" required></textarea> <br><br>
+            <input type="submit" value="adicionar"> 
+            <input type="reset" value="apagar">
+        </form>
+        <br><br><br><br>
+    </div>
+{% endblock %}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt">
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Titulo janota{% endblock %}</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <script src="{{ url_for('static', filename='js/uteis.js') }}"></script>
+	</head>
+	<body>
+        <header>
+            <div class="cxFlex80">
+                <img src="{{ url_for('static', filename='img/logo.png')}}" alt="Logótipo" id="imgLogo">
+                <p id="slogan">Projeto Camalheia :: viaje pelo mundo ficando alojado na... cama alheia</p>
+
+                
+                {% if user_logado %}
+                {# {% if session.get("id_utilizador") %} #}
+                    <p class="logout-link">
+                        Olá {{username}} -  
+                        <a href="{{ url_for('autenticacao.logout') }}" class="logout-link">Logout</a>
+                    </p>
+                {% else %}
+                    <form action=" {{ url_for('autenticacao.login') }} " name="formLogin" id="id_formLogin" method="POST" enctype="application/x-www-form-urlencoded">
+                        <div id="agrupaInputs">
+                            <input type="text" name="fuser" placeholder="user" class="input-login" required>
+                            <input type="password" name="fpass" placeholder="password" class="input-login" required>
+                        </div>
+                        <input type="submit" value="entrar">
+                    </form>
+                {% endif %}
+
+            </div>
+        </header>
+
+        <main>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for categoria, mensagem in messages %}
+                        <div class="{{ categoria }}">
+                            <div class="mensagem_flash">
+                                {{ mensagem }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div id="barraPesquisa">
+                <nav>
+                    <a href="{{  url_for('cidades.homepage') }}">Home</a>
+                    {% if user_logado %}
+                        <a href="{{ url_for('cidades.add_cidade')}}">Adicionar</a>
+                        <a href="{{ url_for('cidades.lista_atualizar')}}">Atualizar</a>
+                        {% if user_nivel == 1 %}
+                            <a href="{{ url_for('cidades.lista_eliminar')}}">Eliminar</a>
+                            <a href="{{ url_for('cidades.adicionar_foto')}}">Fotos</a>
+                        {% endif %}
+                    {% endif %}
+                </nav>
+
+                <form name="formPesquisa" action="{{ url_for('cidades.pesquisa') }}" method="POST" enctype="application/x-www-form-urlencoded" action="">
+                    <input type="text" name="fpesquisa" class="input-pesquisa">
+                    <input type="submit" value="pesquisa">
+                </form>
+            </div>
+
+            {% block intro %}
+            {% endblock %}
+            
+            
+            {% block content %}
+            {% endblock %}
+
+        </main> <!-- fim da cxsite -->
+        <footer>
+            <p>O Projeto Camalheia é exclusivamente patrocinado por Durex Lda, Harmony SA e Control Lda</p>
+        </footer>
+	</body>
+</html>

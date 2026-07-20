@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}  Camalheia - Pesquisa  {% endblock %}
+
+{% block intro %}
+    <p id="p_titulo_01">Pesquisa por "{{ str }}"</p>  
+{% endblock %}
+
+{% block content %}
+<br>
+<div>
+    {% for item in dados: %}
+        <div class="resultado-pesquisa">
+            <a href="{{ url_for('cidades.detalhes', cidade_id=item.id)}}">
+                <p class='pesquisa-tit'>{{ item.nome }}</p>
+                <p class='pesquisa-desc'>{{ item.desc|safe }}</p>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
